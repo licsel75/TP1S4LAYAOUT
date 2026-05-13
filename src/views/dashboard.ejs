@@ -1,0 +1,104 @@
+<%- include('partials/header') %>
+
+<!-- Formulario de búsqueda -->
+<div class="search-container">
+    <form action="/dashboard" method="GET" class="search-form">
+        <input type="text" 
+               name="nombre" 
+               value="<%= busqueda %>" 
+               placeholder="Buscar por nombre..." 
+               class="search-input">
+        <button type="submit" class="btn search">🔍 Buscar</button>
+        <a href="/dashboard" class="btn clear">✖️ Limpiar</a>
+    </form>
+</div>
+<h1><%= titulo %></h1>
+
+<% if (superheroes && superheroes.length > 0) { %>
+
+    <div class="heroes-grid">
+
+        <% superheroes.forEach(heroe => { %>
+
+            <div class="hero-card">
+
+                <h2><%= heroe.nombreSuperHeroe %></h2>
+
+                <p>
+                    <strong>Nombre real:</strong>
+                    <%= heroe.nombreReal %>
+                </p>
+
+                <p>
+                    <strong>Edad:</strong>
+                    <%= heroe.edad %> años
+                </p>
+
+                <p>
+                    <strong>Planeta:</strong>
+                    <%= heroe.planetaOrigen || 'Tierra' %>
+                </p>
+
+                <p>
+                    <strong>Debilidad:</strong>
+                    <%= heroe.debilidad || 'Ninguna' %>
+                </p>
+
+                <div class="card-actions">
+
+                    <!-- EDITAR -->
+                    <a href="/dashboard/editar/<%= heroe._id %>" class="btn edit">
+                        ✏️ Editarrrr
+                    </a>
+
+                    <!-- ELIMINAR -->
+                    <button
+                        onclick="eliminar('<%= heroe._id %>', '<%= heroe.nombreSuperHeroe %>')"
+                        class="btn delete">
+                        🗑️ Eliminarrrr
+                    </button>
+
+                </div>
+
+            </div>
+
+        <% }); %>
+
+    </div>
+
+<% } else { %>
+
+    <div class="alert warning">
+        ⚠️ No hay superhéroes cargados. ¡Agregá uno!
+    </div>
+
+<% } %>
+
+<!-- AGREGAR -->
+<a href="/dashboard/agregar" class="btn add">
+    ➕ Agregar Nuevo Superhéroe
+</a>
+
+<script>
+
+    function eliminar(id, nombre) {
+
+        if (confirm(`¿Eliminar a ${nombre}?`)) {
+
+            fetch(`/api/heroes/eliminar/${id}?_method=DELETE`, {
+                method: 'POST'
+            })
+            .then(() => {
+                window.location.href = '/dashboard';
+            })
+            .catch(err => {
+                console.error('Error:', err);
+            });
+
+        }
+
+    }
+
+</script>
+
+<%- include('partials/footer') %>

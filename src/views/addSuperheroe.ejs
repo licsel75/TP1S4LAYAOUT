@@ -1,0 +1,60 @@
+<%- include('partials/header') %>
+
+<h1><%= titulo %></h1>
+
+<% if (errores) { %>
+    <div class="alert error">
+        <% errores.forEach(error => { %>
+            <p>❌ <%= error.msg %></p>
+        <% }); %>
+    </div>
+<% } %>
+
+<form action="/dashboard/agregar" method="POST">
+    <div class="form-group">
+        <label>Nombre del Superhéroe *</label>
+        <input type="text" name="nombreSuperHeroe" value="<%= datos ? datos.nombreSuperHeroe : '' %>" >
+    </div>
+    
+    <div class="form-group">
+        <label>Nombre Real *</label>
+        <input type="text" name="nombreReal" value="<%= datos ? datos.nombreReal : '' %>" >
+    </div>
+    
+    <div class="form-group">
+        <label>Edad *</label>
+        <input type="number" name="edad" value="<%= datos ? datos.edad : '' %>" >
+    </div>
+    
+    <div class="form-group">
+        <label>Planeta de Origen</label>
+        <input type="text" name="planetaOrigen" value="<%= datos ? datos.planetaOrigen : 'Tierra' %>">
+    </div>
+    
+    <div class="form-group">
+        <label>Debilidad</label>
+        <input type="text" name="debilidad" value="<%= datos ? datos.debilidad : '' %>">
+    </div>
+    
+    <div class="form-group">
+        <label>Poderes (separados por coma)</label>
+        <input type="text" name="poderes" value="<%= datos && datos.poderes ? datos.poderes.join(', ') : '' %>">
+    </div>
+    
+    <div class="form-group">
+        <label>Aliados (separados por coma)</label>
+        <input type="text" name="aliados" value="<%= datos && datos.aliados ? datos.aliados.join(', ') : '' %>">
+    </div>
+    
+    <div class="form-group">
+        <label>Enemigos (separados por coma)</label>
+        <input type="text" name="enemigos" value="<%= datos && datos.enemigos ? datos.enemigos.join(', ') : '' %>">
+    </div>
+    
+    <div class="form-actions">
+        <button type="submit" class="btn save">💾 Guardar</button>
+        <a href="/dashboard" class="btn cancel">❌ Cancelar</a>
+    </div>
+</form>
+
+<%- include('partials/footer') %>
