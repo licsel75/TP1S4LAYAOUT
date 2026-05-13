@@ -3,6 +3,7 @@
 
 import express from 'express';
 import {
+        landingController,  // NUEVO
     dashboardController,
     showAddFormController,
     createSuperheroeController,   
@@ -29,5 +30,9 @@ router.put('/editar/:id', validateSuperheroe, updateSuperheroeController);
 
 // Eliminar (desde form o fetch)
 router.post('/eliminar/:id', deleteSuperheroeController);
+
+// Ruta para la landing
+router.get('/landing', landingController);
+
 
 export default router;

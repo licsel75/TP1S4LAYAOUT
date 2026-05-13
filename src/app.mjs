@@ -15,6 +15,8 @@ import { connectDB } from './config/dbConfig.mjs';
 import superHeroRoutesDatos from './routes/superHeroesRoutesDatos.mjs';  // backend (JSON)
 import heroFrontRoutesVistas from './routes/superHeroesRoutesVistas.mjs';  // VISTAS front
 
+import expressLayouts from 'express-ejs-layouts';  // utilizando layout
+
 
 const app = express();
 const PORT = 3005;
@@ -33,6 +35,11 @@ app.use(express.static(path.join(__dirname, 'public')));//El navegador pide /css
 app.set('view engine', 'ejs');//se define que voy a usar ejs
 app.set('views', path.join(__dirname, 'views'));//donde estan las vistas 
 
+
+// express-ejs-layouts
+app.use(expressLayouts);           // Activa el middleware
+app.set('layout', 'layout');       // Nombre del archivo layout (sin .ejs)
+
 // Conexión a DB
 await connectDB();
 
@@ -43,11 +50,18 @@ app.use('/dashboard', heroFrontRoutesVistas);
 console.log('Rutas de héroes montadas en /api/heroes');
 
 // Ruta principal
-app.get('/', (req, res) => {
-    res.redirect('/dashboard');
-});
+// app.get('/', (req, res) => {
+//     res.redirect('/dashboard');
+// });
 //si el navegador peticiona localhost:3005/ se redirige a localhost:3005/dashboard 
 
+
+// Ruta principal (landing)
+app.get('/', (req, res) => {
+    res.render('landing', {
+        titulo: 'Inicio - SuperApp'
+    });
+});
 
 
 

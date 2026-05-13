@@ -137,3 +137,10 @@ export const deleteSuperheroeController = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+// Landing page
+export const landingController = (req, res) => {
+    res.render('landing', {
+        titulo: 'Inicio - SuperApp'
+    });
+};
