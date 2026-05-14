@@ -69,7 +69,7 @@ export const validateSuperheroe = [
     // PODERES (cada uno mínimo 3 caracteres)
     // ==========================================
     body('poderes')
-        .optional()
+        .notEmpty()
         .custom((value) => validarArrayMinimo(value, 'poder', 3)),
     
     // ==========================================

@@ -38,24 +38,29 @@
                     <strong>Planeta:</strong>
                     <%= heroe.planetaOrigen || 'Tierra' %>
                 </p>
+                    <p>
+                    <strong>Poder:</strong>
+                    <%= heroe.poderes || 'Ninguna' %>
+                </p>
 
                 <p>
                     <strong>Debilidad:</strong>
                     <%= heroe.debilidad || 'Ninguna' %>
                 </p>
+              
 
                 <div class="card-actions">
 
                     <!-- EDITAR -->
                     <a href="/dashboard/editar/<%= heroe._id %>" class="btn edit">
-                        ✏️ Editarrrr
+                        ✏️ Editar
                     </a>
 
                     <!-- ELIMINAR -->
                     <button
                         onclick="eliminar('<%= heroe._id %>', '<%= heroe.nombreSuperHeroe %>')"
                         class="btn delete">
-                        🗑️ Eliminarrrr
+                        🗑️ Eliminar
                     </button>
 
                 </div>
@@ -101,4 +106,4 @@
 
 </script>
 
-<%- include('partials/footer') %>
+<!-- <%- include('partials/footer') %> -->
