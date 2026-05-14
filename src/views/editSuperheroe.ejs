@@ -10,7 +10,7 @@
     </div>
 <% } %>
 
-<form action="/dashboard/editar/<%= heroe._id %>?_method=TPU"
+<form action="/dashboard/editar/<%= heroe._id %>?_method=PUT"
       method="POST"
       class="hero-form">
 
@@ -34,15 +34,17 @@
         <input type="text" name="planetaOrigen" value="<%= heroe.planetaOrigen || 'Tierra' %>">
     </div>
     
-    <div class="form-group">
-        <label>Debilidad</label>
-        <input type="text" name="debilidad" value="<%= heroe.debilidad || '' %>">
-    </div>
+
     
     <div class="form-group">
         <label>Poderes (separados por coma)</label>
         <input type="text" name="poderes" value="<%= heroe.poderes ? heroe.poderes.join(', ') : '' %>">
     </div>
+    <div class="form-group">
+        <label>Debilidad</label>
+        <input type="text" name="debilidad" value="<%= heroe.debilidad || '' %>">
+    </div>
+    
     
     <div class="form-group">
         <label>Aliados (separados por coma)</label>

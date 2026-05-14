@@ -20,6 +20,11 @@ const prepararDatosParaVista = (data, id) => {
     return preparados;
 };
 
+
+
+
+
+
 // Validación para arrays (poderes, aliados, enemigos)
 const validarArrayMinimo = (value, nombreCampo, min = 3) => {
     if (!value) return true; // Opcional
@@ -65,12 +70,41 @@ export const validateSuperheroe = [
         .isLength({ min: 3 }).withMessage('La debilidad debe tener al menos 3 caracteres')
         .trim(),
     
+
+
+        
     // ==========================================
     // PODERES (cada uno mínimo 3 caracteres)
     // ==========================================
-    body('poderes')
-        .notEmpty()
-        .custom((value) => validarArrayMinimo(value, 'poder', 3)),
+    // body('poderes')
+    //     .notEmpty()
+    //     .custom((value) => validarArrayMinimo(value, 'poder', 3)),
+
+
+    // ... resto de validaciones ...
+
+body('poderes')
+    .custom((value) => {
+        if (!value || value.trim() === '') {
+            throw new Error('Debes ingresar al menos un poder');
+        }
+        const poderes = value.split(',').map(p => p.trim());
+        if (poderes.length === 0) {
+            throw new Error('Debes ingresar al menos un poder');
+        }
+        for (const poder of poderes) {
+            if (poder.length < 3) {
+                throw new Error(`El poder "${poder}" debe tener al menos 3 caracteres`);
+            }
+        }
+        return true;
+    }),
+
+
+
+
+
+
     
     // ==========================================
     // ALIADOS (cada uno mínimo 3 caracteres)

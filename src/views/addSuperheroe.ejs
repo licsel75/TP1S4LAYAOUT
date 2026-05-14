@@ -1,4 +1,4 @@
-<%- include('partials/header') %>
+<!-- <%- include('partials/header') %> -->
 
 <h1><%= titulo %></h1>
 
@@ -30,16 +30,19 @@
         <label>Planeta de Origen</label>
         <input type="text" name="planetaOrigen" value="<%= datos ? datos.planetaOrigen : 'Tierra' %>">
     </div>
+
     
+
+    <div class="form-group">
+        <label>Poderes (separados por coma)</label>
+        <input type="text" name="poderes" value="<%= datos && datos.poderes ? datos.poderes.join(', ') : '' %>">
+    </div>
     <div class="form-group">
         <label>Debilidad</label>
         <input type="text" name="debilidad" value="<%= datos ? datos.debilidad : '' %>">
     </div>
     
-    <div class="form-group">
-        <label>Poderes (separados por coma)</label>
-        <input type="text" name="poderes" value="<%= datos && datos.poderes ? datos.poderes.join(', ') : '' %>">
-    </div>
+  
     
     <div class="form-group">
         <label>Aliados (separados por coma)</label>
