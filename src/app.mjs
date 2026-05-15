@@ -36,9 +36,19 @@ app.set('view engine', 'ejs');//se define que voy a usar ejs
 app.set('views', path.join(__dirname, 'views'));//donde estan las vistas 
 
 
+
+
+
+
 // express-ejs-layouts
-app.use(expressLayouts);           // Activa el middleware
-app.set('layout', 'layout');       // Nombre del archivo layout (sin .ejs)
+app.use(expressLayouts);           // Poner en uso o activar  el middleware
+app.set('layout', 'layout');       // Nombre del archivo layout 
+
+
+
+
+
+
 
 // Conexión a DB
 await connectDB();
